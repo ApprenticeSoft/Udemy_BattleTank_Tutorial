@@ -30,14 +30,21 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
 		StartLocation,
 		HitLocation,
 		LaunchSpeed,
+		0,
+		0,
 		false,
-		0,
-		0,
-		ESuggestProjVelocityTraceOption::DoNotTrace
+		ESuggestProjVelocityTraceOption::TraceFullPath // Problème avec cette ligne. Assayez DoNotTrace
 		))
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
+		auto Time = GetWorld()->TimeSeconds;
+		UE_LOG(LogTemp, Warning, TEXT("%f: Aim solution found"), Time);
+	}
+	else 
+	{
+		auto Time = GetWorld()->TimeSeconds;
+		UE_LOG(LogTemp, Warning, TEXT("%f: Aim solution not found"), Time);
 	}
 }
 
