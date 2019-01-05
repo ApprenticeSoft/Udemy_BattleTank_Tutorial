@@ -33,7 +33,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
 		0,
 		0,
 		false,
-		ESuggestProjVelocityTraceOption::TraceFullPath // Problème avec cette ligne. Assayez DoNotTrace
+		ESuggestProjVelocityTraceOption::DoNotTrace // Problème avec cette ligne. Assayez DoNotTrace
 		))
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
@@ -54,7 +54,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 	
-	Barrel->Elevate(5);
+	Barrel->Elevate(DeltaRotator.Pitch);
 }
 
 void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
