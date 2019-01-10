@@ -10,6 +10,7 @@
 class UTankBarrel;
 class UTankTurret;
 class UTankAimingComponent;
+class AProjectile;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -43,4 +44,11 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 100000; // TODO find sensible starting value
+
+	UPROPERTY(EditAnywhere, Category = Setup)
+	//UClass* ProjectileBluePrint;		// UClass* va afficher la totalités des classes disponibles dans le blueprint alors que TSubclassOf<> n'affiche que la classe choisie
+	TSubclassOf<AProjectile> ProjectileBluePrint;
+
+	// Local barrel reference for spawning projectile
+	UTankBarrel* Barrel = nullptr;
 };
